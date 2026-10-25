@@ -2,8 +2,8 @@
   "profile": {
     "name": "Katalog Rekomendasi",
     "bio": "Produk pilihan yang saya pakai & rekomendasikan",
-    "avatar": "",
-    "color": "#ff5a36"
+    "avatar": "https://drive.google.com/file/d/1yAd8T-F2LU2uS--ecRRKJ7dqcEJ29zSp/view?usp=drivesdk",
+    "color": "#ff7003"
   },
   "products": [
     {
@@ -11,13 +11,13 @@
       "name": "Contoh Produk (hapus lewat halaman admin)",
       "price": 99000,
       "category": "Contoh",
-      "image": "",
-      "link": "https://shopee.co.id",
+      "oldPrice": 129000,
+      "badge": "Terlaris",
+      "image": "https://drive.google.com/file/d/1yAd8T-F2LU2uS--ecRRKJ7dqcEJ29zSp/view?usp=drivesdk",
+      "link": "https://s.shopee.co.id/20vTYZAfOr",
       "store": "Shopee",
       "description": "Ini produk contoh. Ganti atau hapus lewat halaman admin.",
-      "active": true,
-      "oldPrice": 129000,
-      "badge": "Terlaris"
+      "active": true
     }
   ]
 }
