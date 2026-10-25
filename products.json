@@ -1,0 +1,23 @@
+{
+  "profile": {
+    "name": "Katalog Rekomendasi",
+    "bio": "Produk pilihan yang saya pakai & rekomendasikan",
+    "avatar": "",
+    "color": "#ff5a36"
+  },
+  "products": [
+    {
+      "id": "contoh1",
+      "name": "Contoh Produk (hapus lewat halaman admin)",
+      "price": 99000,
+      "category": "Contoh",
+      "image": "",
+      "link": "https://shopee.co.id",
+      "store": "Shopee",
+      "description": "Ini produk contoh. Ganti atau hapus lewat halaman admin.",
+      "active": true,
+      "oldPrice": 129000,
+      "badge": "Terlaris"
+    }
+  ]
+}
