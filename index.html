@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Katalog Rekomendasi</title>
-<meta name="description" content="Rekomendasi produk pilihan">
+<title>Toko Digital</title>
+<meta name="description" content="Undangan digital, e-book, website portofolio, dan desain">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
@@ -25,26 +25,38 @@ h1{font-size:1.35rem;font-weight:800;margin-top:10px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
 .item{background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line);cursor:pointer;display:flex;flex-direction:column;text-align:left;padding:0;color:inherit;font:inherit}
 .item img{width:100%;aspect-ratio:1/1;object-fit:cover;background:var(--line);display:block}
-.ph{position:relative}.badge{position:absolute;top:8px;left:8px;background:var(--accent);color:#fff;font-size:.7rem;font-weight:800;padding:3px 9px;border-radius:999px}
-.old{text-decoration:line-through;color:var(--mute);font-size:.74rem;font-weight:400;margin-left:6px}.off{font-size:.72rem;font-weight:800;color:var(--brand);margin-left:6px}
-.item .t{padding:10px 10px 4px;font-size:.84rem;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:3.1em}
+.ph{position:relative}
+.badge{position:absolute;top:8px;left:8px;background:var(--accent);color:#fff;font-size:.7rem;font-weight:800;padding:3px 9px;border-radius:999px}
+.item .c{padding:9px 10px 0;font-size:.7rem;font-weight:700;color:var(--brand);text-transform:uppercase;letter-spacing:.04em}
+.item .t{padding:2px 10px 4px;font-size:.86rem;font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:3.1em}
 .item .p{padding:0 10px 12px;font-weight:800;color:var(--accent)}
+.old{text-decoration:line-through;color:var(--mute);font-size:.74rem;font-weight:400;margin-left:6px}
+.off{font-size:.72rem;font-weight:800;color:var(--brand);margin-left:6px}
 .empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:40px 0}
 footer{text-align:center;color:var(--mute);font-size:.72rem;margin-top:26px}
 .sheet{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center;z-index:9}
 .sheet.open{display:flex}
-.panel{background:var(--card);width:100%;max-width:560px;max-height:92vh;overflow-y:auto;border-radius:20px 20px 0 0;animation:up .22s ease-out}
+.panel{position:relative;background:var(--card);width:100%;max-width:560px;max-height:92vh;overflow-y:auto;border-radius:20px 20px 0 0;animation:up .22s ease-out}
 @keyframes up{from{transform:translateY(40px);opacity:.6}to{transform:none;opacity:1}}
 @media(prefers-reduced-motion:reduce){.panel{animation:none}}
-.panel img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--line)}
-.body{padding:16px 16px calc(20px + env(safe-area-inset-bottom))}
+.gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;background:var(--line)}
+.gal::-webkit-scrollbar{display:none}
+.gal img{flex:0 0 100%;scroll-snap-align:center;width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.hint{text-align:center;font-size:.72rem;color:var(--mute);padding:6px 0 0}
+.body{padding:14px 16px calc(20px + env(safe-area-inset-bottom))}
 .body h2{font-size:1.1rem;font-weight:800}
 .price{font-size:1.3rem;font-weight:800;color:var(--accent);margin:4px 0 10px}
 .desc{color:var(--mute);font-size:.92rem;white-space:pre-line;margin-bottom:16px}
-.buy{display:block;text-align:center;background:var(--accent);color:#fff;text-decoration:none;font-weight:800;padding:14px;border-radius:999px}
-.buy:active{background:var(--accent-d)}
-.close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:1.2rem;cursor:pointer}
-.pw{position:relative}
+.btn{display:block;width:100%;text-align:center;text-decoration:none;font:800 1rem inherit;font-family:inherit;padding:14px;border-radius:999px;border:0;cursor:pointer;margin-top:10px}
+.buy{background:var(--accent);color:#fff}.buy:active{background:var(--accent-d)}
+.demo{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.wa{background:#1fa855;color:#fff}
+.close{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:1.2rem;cursor:pointer;z-index:2}
+.back{background:none;border:0;color:var(--mute);font:600 .85rem inherit;font-family:inherit;padding:16px 16px 0;cursor:pointer}
+.qr{display:block;width:min(260px,70%);margin:12px auto;border-radius:12px;background:#fff;padding:8px;border:1px solid var(--line)}
+.tot{text-align:center;font-size:1.6rem;font-weight:800;color:var(--accent)}
+.note{font-size:.8rem;color:var(--mute);text-align:center;margin-top:6px}
+.steps{font-size:.84rem;color:var(--mute);margin:14px 0 0 18px}
 :focus-visible{outline:3px solid var(--brand);outline-offset:2px}
 </style>
 </head>
@@ -52,61 +64,77 @@ footer{text-align:center;color:var(--mute);font-size:.72rem;margin-top:26px}
 <div class="wrap">
   <header>
     <img id="ava" class="ava" alt="" hidden>
-    <h1 id="nm">Katalog Rekomendasi</h1>
+    <h1 id="nm">Toko Digital</h1>
     <p class="bio" id="bio"></p>
   </header>
-  <input class="search" id="q" type="search" placeholder="Cari produk…" aria-label="Cari produk">
+  <input class="search" id="q" type="search" placeholder="Cari undangan, e-book, desain…" aria-label="Cari produk">
   <div class="chips" id="chips"></div>
   <main class="grid" id="grid"><p class="empty">Memuat produk…</p></main>
-  <footer>Beberapa link adalah link affiliate. Harga bisa berubah sewaktu-waktu di toko.</footer>
+  <footer>Pembayaran via QRIS. Akses dikirim setelah pembayaran dikonfirmasi.</footer>
 </div>
-<div class="sheet" id="sheet" role="dialog" aria-modal="true">
-  <div class="panel pw" id="panel"></div>
-</div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="panel" id="panel"></div></div>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-// Ubah link share Google Drive jadi link gambar yang bisa ditampilkan
-function img(u){
+function img(u,w=800){
   if(!u)return'';
   const m=u.match(/\/d\/([\w-]+)/)||u.match(/[?&]id=([\w-]+)/);
-  return m&&/drive\.google|googleusercontent/.test(u)?`https://drive.google.com/thumbnail?id=${m[1]}&sz=w800`:u;
+  return m&&/drive\.google|googleusercontent/.test(u)?`https://drive.google.com/thumbnail?id=${m[1]}&sz=w${w}`:u;
 }
 const rp=n=>'Rp'+Number(n||0).toLocaleString('id-ID');
+const imgs=p=>p.images||(p.image?[p.image]:[]);
+const bd=p=>p.badge?`<span class="badge">${esc(p.badge)}</span>`:'';
+const safeUrl=u=>{try{const x=new URL(u);return/^https?:$/.test(x.protocol)?x.href:'#'}catch{return'#'}};
 function price(p){
-  if(!p.price)return'Lihat harga';
+  if(!p.price)return'Hubungi kami';
   const d=p.oldPrice>p.price?Math.round((1-p.price/p.oldPrice)*100):0;
   return rp(p.price)+(d?`<span class="old">${rp(p.oldPrice)}</span><span class="off">-${d}%</span>`:'');
 }
-const bd=p=>p.badge?`<span class="badge">${esc(p.badge)}</span>`:'';
-let all=[],cat='Semua';
-function safeUrl(u){try{const x=new URL(u);return/^https?:$/.test(x.protocol)?x.href:'#'}catch{return'#'}}
+let all=[],cat='Semua',pf={},cur=null;
 function render(){
   const q=$('#q').value.toLowerCase();
   const list=all.filter(p=>(cat==='Semua'||p.category===cat)&&(p.name+' '+p.description).toLowerCase().includes(q));
-  $('#grid').innerHTML=list.length?list.map(p=>`<button class="item" data-id="${esc(p.id)}"><div class="ph"><img loading="lazy" src="${esc(img(p.image))}" alt="${esc(p.name)}" referrerpolicy="no-referrer">${bd(p)}</div><span class="t">${esc(p.name)}</span><span class="p">${price(p)}</span></button>`).join(''):'<p class="empty">Produk tidak ditemukan.</p>';
+  $('#grid').innerHTML=list.length?list.map(p=>`<button class="item" data-id="${esc(p.id)}"><div class="ph"><img loading="lazy" src="${esc(img(imgs(p)[0],500))}" alt="${esc(p.name)}" referrerpolicy="no-referrer">${bd(p)}</div><span class="c">${esc(p.category)}</span><span class="t">${esc(p.name)}</span><span class="p">${price(p)}</span></button>`).join(''):'<p class="empty">Produk tidak ditemukan.</p>';
 }
 function chips(){
   const cs=['Semua',...new Set(all.map(p=>p.category).filter(Boolean))];
   $('#chips').innerHTML=cs.length>2?cs.map(c=>`<button class="chip ${c===cat?'on':''}" data-c="${esc(c)}">${esc(c)}</button>`).join(''):'';
 }
-function open_(id){
-  const p=all.find(x=>x.id===id);if(!p)return;
-  $('#panel').innerHTML=`<button class="close" aria-label="Tutup">✕</button><div class="ph"><img src="${esc(img(p.image))}" alt="${esc(p.name)}" referrerpolicy="no-referrer">${bd(p)}</div><div class="body"><h2>${esc(p.name)}</h2><div class="price">${price(p)}</div><p class="desc">${esc(p.description)}</p><a class="buy" href="${esc(safeUrl(p.link))}" target="_blank" rel="noopener sponsored">Beli di ${esc(p.store||'Shopee')}</a></div>`;
-  $('#sheet').classList.add('open');document.body.style.overflow='hidden';
+function detail(p){
+  cur=p;const im=imgs(p);
+  $('#panel').innerHTML=`<button class="close" aria-label="Tutup">✕</button><div class="ph"><div class="gal">${im.length?im.map(u=>`<img src="${esc(img(u))}" alt="${esc(p.name)}" referrerpolicy="no-referrer">`).join(''):'<img alt="">'}</div>${bd(p)}</div>${im.length>1?`<div class="hint">Geser untuk melihat ${im.length} foto →</div>`:''}<div class="body"><h2>${esc(p.name)}</h2><div class="price">${price(p)}</div><p class="desc">${esc(p.description)}</p>${p.demo?`<a class="btn demo" href="${esc(safeUrl(p.demo))}" target="_blank" rel="noopener">Lihat Demo</a>`:''}<button class="btn buy" data-buy>Beli Sekarang</button></div>`;
+  $('#panel').scrollTop=0;
+}
+function wa(msg){
+  let n=String(pf.whatsapp||'').replace(/\D/g,'');if(n.startsWith('0'))n='62'+n.slice(1);
+  return n?`https://wa.me/${n}?text=${encodeURIComponent(msg)}`:'';
+}
+function pay(){
+  const p=cur,code=p.price?Math.floor(Math.random()*89)+11:0,total=p.price?p.price+code:0;
+  const msg=`Halo, saya mau pesan "${p.name}"`+(total?` dan sudah bayar ${rp(total)} via QRIS.`:'.')+` Mohon info langkah selanjutnya.`;
+  const link=wa(msg),qr=img(pf.qris,700);
+  $('#panel').innerHTML=`<button class="close" aria-label="Tutup">✕</button><button class="back" data-back>← Kembali</button><div class="body"><h2>${esc(p.name)}</h2>${total&&qr?`<img class="qr" src="${esc(qr)}" alt="QRIS" referrerpolicy="no-referrer"><div class="tot">${rp(total)}</div><p class="note">Bayar tepat sesuai nominal ini (sudah termasuk kode unik ${code}) supaya cepat terverifikasi.</p><button class="btn demo" data-copy="${total}">Salin nominal</button>`:''}${link?`<a class="btn wa" href="${esc(link)}" target="_blank" rel="noopener">${total?'Saya sudah bayar, konfirmasi via WhatsApp':'Pesan via WhatsApp'}</a>`:'<p class="note">Kontak penjual belum diatur.</p>'}<ol class="steps"><li>Scan QRIS dan bayar sesuai nominal.</li><li>Tekan tombol WhatsApp untuk konfirmasi.</li><li>Kirim data atau foto yang diminta, lalu akses dikirim setelah pembayaran dicek.</li></ol></div>`;
+  $('#panel').scrollTop=0;
 }
 function close_(){$('#sheet').classList.remove('open');document.body.style.overflow=''}
-$('#grid').onclick=e=>{const b=e.target.closest('.item');if(b)open_(b.dataset.id)};
+$('#grid').onclick=e=>{const b=e.target.closest('.item');if(!b)return;const p=all.find(x=>x.id===b.dataset.id);if(p){detail(p);$('#sheet').classList.add('open');document.body.style.overflow='hidden'}};
 $('#chips').onclick=e=>{const b=e.target.closest('.chip');if(b){cat=b.dataset.c;chips();render()}};
 $('#q').oninput=render;
-$('#sheet').onclick=e=>{if(e.target.id==='sheet'||e.target.closest('.close'))close_()};
+$('#sheet').onclick=e=>{
+  const t=e.target;
+  if(t.id==='sheet'||t.closest('.close'))return close_();
+  if(t.closest('[data-buy]'))return pay();
+  if(t.closest('[data-back]'))return detail(cur);
+  const c=t.closest('[data-copy]');
+  if(c){try{navigator.clipboard.writeText(c.dataset.copy);c.textContent='Tersalin ✓'}catch{}}
+};
 addEventListener('keydown',e=>e.key==='Escape'&&close_());
 fetch('products.json?t='+Date.now()).then(r=>r.json()).then(d=>{
-  const pf=d.profile||{};
+  pf=d.profile||{};
   if(pf.name){$('#nm').textContent=pf.name;document.title=pf.name}
   $('#bio').textContent=pf.bio||'';
+  if(pf.avatar){const a=$('#ava');a.src=img(pf.avatar,300);a.hidden=false;a.referrerPolicy='no-referrer'}
   if(/^#[0-9a-f]{6}$/i.test(pf.color||'')){const r=document.documentElement.style;r.setProperty('--accent',pf.color);r.setProperty('--accent-d',pf.color);r.setProperty('--brand',pf.color)}
-  if(pf.avatar){const a=$('#ava');a.src=img(pf.avatar);a.hidden=false;a.referrerPolicy='no-referrer'}
   all=(d.products||[]).filter(p=>p.active!==false);
   chips();render();
 }).catch(()=>{$('#grid').innerHTML='<p class="empty">Gagal memuat produk. Coba muat ulang halaman.</p>'});
