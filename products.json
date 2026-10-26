@@ -1,22 +1,23 @@
 {
   "profile": {
-    "name": "Katalog Rekomendasi",
-    "bio": "Produk pilihan yang saya pakai & rekomendasikan",
-    "avatar": "https://drive.google.com/file/d/1yAd8T-F2LU2uS--ecRRKJ7dqcEJ29zSp/view?usp=drivesdk",
-    "color": "#ff7003"
+    "name": "Toko Digital",
+    "bio": "Undangan digital, e-book, website portofolio & desain",
+    "avatar": "",
+    "color": "#ff5a36",
+    "whatsapp": "",
+    "qris": ""
   },
   "products": [
     {
       "id": "contoh1",
-      "name": "Contoh Produk (hapus lewat halaman admin)",
-      "price": 99000,
-      "category": "Contoh",
-      "oldPrice": 129000,
+      "name": "Undangan Digital Elegan (contoh, hapus lewat admin)",
+      "price": 75000,
+      "oldPrice": 120000,
       "badge": "Terlaris",
-      "image": "https://drive.google.com/file/d/1yAd8T-F2LU2uS--ecRRKJ7dqcEJ29zSp/view?usp=drivesdk",
-      "link": "https://s.shopee.co.id/20vTYZAfOr",
-      "store": "Shopee",
-      "description": "Ini produk contoh. Ganti atau hapus lewat halaman admin.",
+      "category": "Undangan Digital",
+      "images": [],
+      "demo": "",
+      "description": "Template undangan pernikahan dengan galeri foto, musik, dan RSVP.\nGanti deskripsi ini lewat halaman admin.",
       "active": true
     }
   ]
