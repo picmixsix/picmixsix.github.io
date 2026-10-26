@@ -80,6 +80,7 @@ footer{text-align:center;color:var(--mute);font-size:.72rem;margin-top:26px}
 .inc{list-style:none;padding:0;margin-bottom:6px}
 .inc li{font-size:.88rem;padding:4px 0 4px 26px;position:relative}
 .inc li::before{content:"✓";position:absolute;left:0;top:4px;width:18px;height:18px;border-radius:50%;background:var(--soft);color:var(--brand);font-size:.7rem;font-weight:800;display:grid;place-items:center}
+.vid{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;margin-bottom:14px}.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .back{background:none;border:0;color:var(--mute);font-weight:600;font-size:.85rem;padding:16px 16px 0;cursor:pointer}
 .qr{display:block;width:min(260px,70%);margin:12px auto;border-radius:12px;background:#fff;padding:8px;border:1px solid var(--line)}
 .tot{text-align:center;font-size:1.6rem;font-weight:800;color:var(--brand)}
@@ -152,9 +153,16 @@ function render(){
   document.querySelector('[data-nav=fav]').className=favMode?'on':'';
   document.querySelector('[data-nav=home]').className=favMode?'':'on';
 }
+function embed(u){
+  if(!u)return'';
+  let m=u.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/))([\w-]{11})/);
+  if(m)return`https://www.youtube-nocookie.com/embed/${m[1]}`;
+  m=u.match(/drive\.google\.com\/file\/d\/([\w-]+)/);
+  return m?`https://drive.google.com/file/d/${m[1]}/preview`:'';
+}
 function detail(p){
-  cur=p;const im=imgs(p),inc=p.includes||[];
-  $('#panel').innerHTML=`<div class="ph"><div class="gal" id="gal">${im.length?im.map(u=>`<img src="${esc(img(u))}" alt="${esc(p.name)}" referrerpolicy="no-referrer">`).join(''):'<img alt="">'}</div><button class="close" aria-label="Kembali">←</button><span class="hr" role="button" aria-label="Favorit" data-fav="${esc(p.id)}">${heart(p.id)}</span>${im.length>1?`<button class="ar l" data-ar="-1" aria-label="Sebelumnya">‹</button><button class="ar r" data-ar="1" aria-label="Berikutnya">›</button><div class="dots" id="dots">${im.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`:''}${bd(p)}</div><div class="body"><div class="hd"><div><h2>${esc(p.name)}</h2><div class="cat2">${esc(p.category)}</div></div><div class="price">${price(p)}</div></div><p class="desc">${esc(p.description)}</p>${inc.length?`<h4>YANG ANDA DAPATKAN</h4><ul class="inc">${inc.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${p.demo?`<a class="btn demo" href="${esc(safeUrl(p.demo))}" target="_blank" rel="noopener">Lihat Demo</a>`:''}<button class="btn buy" data-buy>Beli Sekarang</button></div>`;
+  cur=p;const im=imgs(p),inc=p.includes||[],em=embed(p.demo);
+  $('#panel').innerHTML=`<div class="ph"><div class="gal" id="gal">${im.length?im.map(u=>`<img src="${esc(img(u))}" alt="${esc(p.name)}" referrerpolicy="no-referrer">`).join(''):'<img alt="">'}</div><button class="close" aria-label="Kembali">←</button><span class="hr" role="button" aria-label="Favorit" data-fav="${esc(p.id)}">${heart(p.id)}</span>${im.length>1?`<button class="ar l" data-ar="-1" aria-label="Sebelumnya">‹</button><button class="ar r" data-ar="1" aria-label="Berikutnya">›</button><div class="dots" id="dots">${im.map((_,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div>`:''}${bd(p)}</div><div class="body"><div class="hd"><div><h2>${esc(p.name)}</h2><div class="cat2">${esc(p.category)}</div></div><div class="price">${price(p)}</div></div><p class="desc">${esc(p.description)}</p>${em?`<h4>VIDEO DEMO</h4><div class="vid"><iframe src="${esc(em)}" title="Video demo" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`:''}${inc.length?`<h4>YANG ANDA DAPATKAN</h4><ul class="inc">${inc.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${p.demo&&!em?`<a class="btn demo" href="${esc(safeUrl(p.demo))}" target="_blank" rel="noopener">Lihat Demo</a>`:''}<button class="btn buy" data-buy>Beli Sekarang</button></div>`;
   const g=$('#gal');g.onscroll=()=>{const i=Math.round(g.scrollLeft/g.clientWidth);document.querySelectorAll('#dots i').forEach((d,k)=>d.className=k===i?'on':'')};
   $('#panel').scrollTop=0;
 }
@@ -169,7 +177,7 @@ function pay(){
   $('#panel').innerHTML=`<button class="back" data-back>← Kembali</button><div class="body"><h2 style="font-size:1.1rem;font-weight:800">${esc(p.name)}</h2>${total&&qr?`<img class="qr" src="${esc(qr)}" alt="QRIS" referrerpolicy="no-referrer"><div class="tot">${rp(total)}</div><p class="note">Bayar tepat sesuai nominal ini (sudah termasuk kode unik ${code}) supaya cepat terverifikasi.</p><button class="btn demo" data-copy="${total}">Salin nominal</button>`:''}${link?`<a class="btn wa" href="${esc(link)}" target="_blank" rel="noopener">${total?'Saya sudah bayar, konfirmasi via WhatsApp':'Pesan via WhatsApp'}</a>`:'<p class="note">Kontak penjual belum diatur.</p>'}<ol class="steps"><li>Scan QRIS dan bayar sesuai nominal.</li><li>Tekan tombol WhatsApp untuk konfirmasi.</li><li>Kirim data atau foto yang diminta, lalu akses dikirim setelah pembayaran dicek.</li></ol></div>`;
   $('#panel').scrollTop=0;
 }
-function close_(){$('#sheet').classList.remove('open');document.body.style.overflow=''}
+function close_(){$('#panel').innerHTML='';$('#sheet').classList.remove('open');document.body.style.overflow=''}
 function toggleFav(id){
   fav.has(id)?fav.delete(id):fav.add(id);
   try{localStorage.setItem('fav',JSON.stringify([...fav]))}catch{}
