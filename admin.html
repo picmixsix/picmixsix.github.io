@@ -45,7 +45,7 @@ small{color:var(--mute);font-size:.76rem;display:block;margin-top:4px}
 </head>
 <body>
 <div class="wrap">
-  <h1>Admin Katalog</h1>
+  <h1>Admin Toko Digital</h1>
 
   <section class="card" id="login">
     <h2>Hubungkan ke GitHub</h2>
@@ -65,6 +65,8 @@ small{color:var(--mute);font-size:.76rem;display:block;margin-top:4px}
       <label for="pn">Nama / judul</label><input id="pn">
       <label for="pb">Bio singkat</label><input id="pb">
       <label for="pa">Link foto profil (Google Drive)</label><input id="pa" inputmode="url">
+      <label for="pw">Nomor WhatsApp (mis. 081234567890)</label><input id="pw" inputmode="tel">
+      <label for="pq">Link gambar QRIS (Google Drive)</label><input id="pq" inputmode="url">
       <label for="pc">Warna tema (tombol &amp; aksen)</label><input id="pc" type="color" value="#ff5a36" style="height:46px;padding:4px">
     </section>
 
@@ -82,13 +84,12 @@ small{color:var(--mute);font-size:.76rem;display:block;margin-top:4px}
       <label for="f_price">Harga (angka saja, mis. 129000)</label><input id="f_price" inputmode="numeric">
       <label for="f_old">Harga sebelum diskon (opsional, untuk harga coret)</label><input id="f_old" inputmode="numeric">
       <label for="f_badge">Label</label><select id="f_badge"><option value="">Tanpa label</option><option>Terlaris</option><option>Baru</option><option>Diskon</option><option>Rekomendasi</option></select>
-      <label for="f_cat">Kategori</label><input id="f_cat" list="cats" placeholder="mis. Fashion">
+      <label for="f_cat">Kategori</label><input id="f_cat" list="cats" placeholder="mis. Undangan Digital">
       <datalist id="cats"></datalist>
-      <label for="f_img">Link gambar (share link Google Drive)</label><input id="f_img" inputmode="url">
+      <label for="f_img">Foto pratinjau (satu link per baris, foto pertama jadi sampul)</label><textarea id="f_img" style="min-height:90px" placeholder="https://drive.google.com/file/d/…"></textarea>
       <img class="prev" id="prev" alt="Pratinjau" hidden>
       <small>Di Drive: Bagikan → Siapa saja yang memiliki link → Salin link. Tempel di sini, otomatis diubah.</small>
-      <label for="f_link">Link affiliate</label><input id="f_link" inputmode="url" placeholder="https://s.shopee.co.id/…">
-      <label for="f_store">Nama toko / marketplace</label><input id="f_store" value="Shopee">
+      <label for="f_demo">Link demo (opsional, mis. undangan contoh)</label><input id="f_demo" inputmode="url" placeholder="https://…">
       <label for="f_desc">Deskripsi</label><textarea id="f_desc"></textarea>
       <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="f_act" style="width:auto" checked> Tampilkan di katalog</label>
       <div class="row"><button class="ghost" id="fc">Batal</button><button id="fs">Simpan produk</button></div>
@@ -124,36 +125,36 @@ async function load(){
   $('#lmsg').className='msg';$('#lmsg').textContent='Menghubungkan…';
   try{
     const r=await api(FILE);
-    if(r.status===404){data={profile:{name:'Katalog Rekomendasi',bio:'',avatar:''},products:[]};sha=null}
+    if(r.status===404){data={profile:{name:'Toko Digital',bio:'',avatar:''},products:[]};sha=null}
     else if(!r.ok){throw new Error(r.status===401?'Token salah atau kedaluwarsa':r.status===403?'Token tidak punya izin ke repository ini':'Gagal ('+r.status+')')}
     else{const j=await r.json();sha=j.sha;data=JSON.parse(b64d(j.content));data.profile=data.profile||{};data.products=data.products||[]}
     localStorage.setItem('kcfg',JSON.stringify(cfg));
     $('#login').hidden=true;$('#app').hidden=false;$('#bar').hidden=false;
-    $('#pn').value=data.profile.name||'';$('#pb').value=data.profile.bio||'';$('#pa').value=data.profile.avatar||'';$('#pc').value=data.profile.color||'#ff5a36';
+    $('#pn').value=data.profile.name||'';$('#pb').value=data.profile.bio||'';$('#pa').value=data.profile.avatar||'';$('#pc').value=data.profile.color||'#ff5a36';$('#pw').value=data.profile.whatsapp||'';$('#pq').value=data.profile.qris||'';
     setDirty(false);draw();
   }catch(e){$('#lmsg').className='msg err';$('#lmsg').textContent=e.message||'Gagal terhubung. Cek username, repo, dan token.'}
 }
 function draw(){
   $('#cnt').textContent=data.products.length;
-  $('#list').innerHTML=data.products.length?data.products.map((p,i)=>`<div class="prod ${p.active===false?'off':''}"><img src="${esc(img(p.image))}" alt="" referrerpolicy="no-referrer"><div class="i"><div class="n">${esc(p.name)}</div><div class="m">${p.price?'Rp'+Number(p.price).toLocaleString('id-ID'):'-'} · ${esc(p.category||'tanpa kategori')}${p.active===false?' · disembunyikan':''}</div></div><div class="a"><button class="ghost" data-a="up" data-i="${i}" aria-label="Naikkan">↑</button><button class="ghost" data-a="ed" data-i="${i}">Edit</button><button class="bad" data-a="del" data-i="${i}" aria-label="Hapus">✕</button></div></div>`).join(''):'<p style="color:var(--mute);padding:10px 0">Belum ada produk. Tekan “+ Tambah”.</p>';
+  $('#list').innerHTML=data.products.length?data.products.map((p,i)=>`<div class="prod ${p.active===false?'off':''}"><img src="${esc(img((p.images||[p.image])[0]))}" alt="" referrerpolicy="no-referrer"><div class="i"><div class="n">${esc(p.name)}</div><div class="m">${p.price?'Rp'+Number(p.price).toLocaleString('id-ID'):'-'} · ${esc(p.category||'tanpa kategori')}${p.active===false?' · disembunyikan':''}</div></div><div class="a"><button class="ghost" data-a="up" data-i="${i}" aria-label="Naikkan">↑</button><button class="ghost" data-a="ed" data-i="${i}">Edit</button><button class="bad" data-a="del" data-i="${i}" aria-label="Hapus">✕</button></div></div>`).join(''):'<p style="color:var(--mute);padding:10px 0">Belum ada produk. Tekan “+ Tambah”.</p>';
   $('#cats').innerHTML=[...new Set(data.products.map(p=>p.category).filter(Boolean))].map(c=>`<option value="${esc(c)}">`).join('');
 }
 function showForm(i){
-  editing=i;const p=i==null?{active:true,store:'Shopee'}:data.products[i];
+  editing=i;const p=i==null?{active:true}:data.products[i];
   $('#ft').textContent=i==null?'Produk baru':'Edit produk';
-  $('#f_name').value=p.name||'';$('#f_price').value=p.price||'';$('#f_cat').value=p.category||'';$('#f_old').value=p.oldPrice||'';$('#f_badge').value=p.badge||'';$('#f_img').value=p.image||'';
-  $('#f_link').value=p.link||'';$('#f_store').value=p.store||'Shopee';$('#f_desc').value=p.description||'';$('#f_act').checked=p.active!==false;
+  $('#f_name').value=p.name||'';$('#f_price').value=p.price||'';$('#f_cat').value=p.category||'';$('#f_old').value=p.oldPrice||'';$('#f_badge').value=p.badge||'';$('#f_img').value=(p.images||(p.image?[p.image]:[])).join('\n');
+  $('#f_demo').value=p.demo||'';$('#f_desc').value=p.description||'';$('#f_act').checked=p.active!==false;
   $('#fmsg').textContent='';prev();$('#form').hidden=false;$('#form').scrollIntoView({behavior:'smooth'});
 }
-function prev(){const u=img($('#f_img').value.trim()),el=$('#prev');el.hidden=!u;if(u)el.src=u;el.referrerPolicy='no-referrer'}
+function prev(){const u=img($('#f_img').value.split('\n')[0].trim()),el=$('#prev');el.hidden=!u;if(u)el.src=u;el.referrerPolicy='no-referrer'}
 $('#f_img').oninput=prev;
 $('#add').onclick=()=>showForm(null);
 $('#fc').onclick=()=>{$('#form').hidden=true};
 $('#fs').onclick=()=>{
-  const name=$('#f_name').value.trim(),link=$('#f_link').value.trim();
+  const name=$('#f_name').value.trim(),demo=$('#f_demo').value.trim();
   if(!name)return $('#fmsg').textContent='Nama produk wajib diisi.';
-  try{if(!/^https?:$/.test(new URL(link).protocol))throw 0}catch{return $('#fmsg').textContent='Link affiliate harus diawali https://'}
-  const p={id:editing==null?Date.now().toString(36):data.products[editing].id,name,price:Number($('#f_price').value.replace(/\D/g,''))||0,category:$('#f_cat').value.trim(),oldPrice:Number($('#f_old').value.replace(/\D/g,''))||0,badge:$('#f_badge').value,image:$('#f_img').value.trim(),link,store:$('#f_store').value.trim()||'Shopee',description:$('#f_desc').value.trim(),active:$('#f_act').checked};
+  if(demo){try{if(!/^https?:$/.test(new URL(demo).protocol))throw 0}catch{return $('#fmsg').textContent='Link demo harus diawali https://'}}
+  const p={id:editing==null?Date.now().toString(36):data.products[editing].id,name,price:Number($('#f_price').value.replace(/\D/g,''))||0,category:$('#f_cat').value.trim(),oldPrice:Number($('#f_old').value.replace(/\D/g,''))||0,badge:$('#f_badge').value,images:$('#f_img').value.split('\n').map(x=>x.trim()).filter(Boolean),demo,description:$('#f_desc').value.trim(),active:$('#f_act').checked};
   if(editing==null)data.products.unshift(p);else data.products[editing]=p;
   $('#form').hidden=true;setDirty(true);draw();
 };
@@ -163,7 +164,7 @@ $('#list').onclick=e=>{
   if(a==='del'&&confirm('Hapus "'+data.products[i].name+'"?')){data.products.splice(i,1);setDirty(true);draw()}
   if(a==='up'&&i>0){[data.products[i-1],data.products[i]]=[data.products[i],data.products[i-1]];setDirty(true);draw()}
 };
-['pn','pb','pa','pc'].forEach(id=>$('#'+id).oninput=()=>{data.profile={name:$('#pn').value.trim(),bio:$('#pb').value.trim(),avatar:$('#pa').value.trim(),color:$('#pc').value};setDirty(true)});
+['pn','pb','pa','pc','pw','pq'].forEach(id=>$('#'+id).oninput=()=>{data.profile={name:$('#pn').value.trim(),bio:$('#pb').value.trim(),avatar:$('#pa').value.trim(),color:$('#pc').value,whatsapp:$('#pw').value.trim(),qris:$('#pq').value.trim()};setDirty(true)});
 $('#pub').onclick=async()=>{
   $('#pub').disabled=true;$('#st').textContent='Menyimpan ke GitHub…';
   try{
