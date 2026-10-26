@@ -2,30 +2,32 @@
   "profile": {
     "name": "Toko Digital",
     "bio": "Undangan digital, e-book, website portofolio & desain",
-    "avatar": "",
+    "avatar": "https://drive.google.com/file/d/1Z_hrbRA7EiXhsVUE4zFvHdZAkEWE2X5x/view?usp=drivesdk",
     "color": "#6a2fa8",
-    "whatsapp": "",
+    "whatsapp": "081181406688",
     "qris": ""
   },
   "products": [
     {
       "id": "contoh1",
       "name": "Undangan Digital Elegan (contoh, hapus lewat admin)",
-      "price": 75000,
-      "oldPrice": 120000,
-      "badge": "Terlaris",
+      "price": 17000,
       "category": "Undangan Digital",
-      "images": [],
-      "demo": "",
-      "description": "Template undangan pernikahan dengan galeri foto, musik, dan RSVP.\nGanti deskripsi ini lewat halaman admin.",
-      "active": true,
+      "oldPrice": 17000,
+      "badge": "Baru",
+      "images": [
+        "https://drive.google.com/file/d/1ifgVnGL4vrxbmjDvdlTH619snkGfqf4F/view?usp=drivesdk"
+      ],
+      "demo": "https://drive.google.com/file/d/1ifgVnGL4vrxbmjDvdlTH619snkGfqf4F/view?usp=drivesdk",
       "includes": [
         "Galeri 10 foto",
         "Musik latar",
         "Link nama sendiri",
         "Revisi 2x"
       ],
-      "featured": true
+      "featured": true,
+      "description": "Template undangan pernikahan dengan galeri foto, musik, dan RSVP.\nGanti deskripsi ini lewat halaman admin.",
+      "active": true
     }
   ],
   "categories": [
