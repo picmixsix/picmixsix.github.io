@@ -54,12 +54,14 @@ section{padding:72px 26px;text-align:center;max-width:560px;margin:0 auto}
   background:radial-gradient(ellipse at 50% 0,#fff8f3,var(--krem) 60%,var(--blush));position:relative}
 .hero::before,.hero::after{content:"";position:absolute;left:50%;width:1px;height:70px;background:linear-gradient(var(--emas),transparent)}
 .hero::before{top:0}.hero::after{bottom:0;transform:rotate(180deg)}
+.sudut{position:absolute;width:min(62vw,300px);pointer-events:none}
+.sudut.a{top:0;left:0}.sudut.b{bottom:0;right:0;transform:rotate(180deg)}
+.hiasan{display:block;width:150px;margin:0 auto 18px}
 .pembuka{font-style:italic;font-size:20px;opacity:.85}
 .nama{font:400 clamp(58px,17vw,92px)/1 var(--script);color:var(--marun);margin:18px 0 6px}
 .dan{font:italic 24px var(--serif);color:var(--emas);margin:2px 0}
 .tgl{margin-top:26px;font-size:20px;letter-spacing:.14em}
 h2{font:400 44px/1.1 var(--script);color:var(--marun);margin-bottom:22px}
-.hiasan{display:block;width:120px;height:14px;margin:0 auto 18px}
 .hitung{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px}
 .hitung div{border:1px solid var(--emas);padding:14px 0 10px;background:rgba(255,255,255,.45)}
 .hitung b{display:block;font:600 34px/1 var(--serif)}
@@ -105,13 +107,15 @@ footer{padding:40px 20px 90px;text-align:center;font-style:italic;opacity:.8}
 
 <!-- ===== ISI UNDANGAN ===== -->
 <section class="hero">
+  <img class="sudut a" src="../aset/bunga-sudut.svg" alt="">
+  <img class="sudut b" src="../aset/bunga-sudut.svg" alt="">
   <p class="pembuka muncul" id="pembuka"></p>
   <h1 class="nama muncul"><span id="pria"></span><div class="dan">&amp;</div><span id="wanita"></span></h1>
   <p class="tgl muncul" id="tglTeks"></p>
 </section>
 
 <section>
-  <svg class="hiasan" viewBox="0 0 120 14"><path d="M0 7H48M72 7H120" stroke="#c9a45c"/><circle cx="60" cy="7" r="4" fill="none" stroke="#c9a45c"/></svg>
+  <img class="hiasan" src="../aset/pembatas-emas.svg" alt="">
   <h2 class="muncul">Menuju Hari Bahagia</h2>
   <div class="hitung muncul">
     <div><b id="h">0</b><span>Hari</span></div><div><b id="j">0</b><span>Jam</span></div>
