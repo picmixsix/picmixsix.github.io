@@ -11,12 +11,14 @@
     {
       "id": "contoh1",
       "name": "Undangan Digital Elegan (contoh, hapus lewat admin)",
-      "price": 75000,
-      "oldPrice": 120000,
-      "badge": "Terlaris",
+      "price": 17000,
       "category": "Undangan Digital",
-      "images": [],
-      "demo": "",
+      "oldPrice": 17000,
+      "badge": "Terlaris",
+      "images": [
+        "https://drive.google.com/file/d/1ifgVnGL4vrxbmjDvdlTH619snkGfqf4F/view?usp=drivesdk"
+      ],
+      "demo": "https://drive.google.com/file/d/1ifgVnGL4vrxbmjDvdlTH619snkGfqf4F/view?usp=drivesdk",
       "description": "Template undangan pernikahan dengan galeri foto, musik, dan RSVP.\nGanti deskripsi ini lewat halaman admin.",
       "active": true
     }
